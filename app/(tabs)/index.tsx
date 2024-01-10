@@ -6,6 +6,7 @@ import EditScreenInfo from '../../components/EditScreenInfo';
 import * as React from 'react';
 import { createRandomUser } from '../../utils/generate-dommy-data';
 import { ThreadsContext } from '../../context/thread-context';
+import ThreadsItem from '../../components/ThreadsItem';
 
 
 
@@ -17,7 +18,7 @@ export default function TabOneScreen() {
     <SafeAreaView>
       <ScrollView
         contentContainerStyle={{
-          backgroundColor: "gray",
+          backgroundColor: "black",
           paddingTop: Platform.select({ android: 30 }),
         }}
         refreshControl={
@@ -33,14 +34,13 @@ export default function TabOneScreen() {
         source={require('../../lottie-animations/threads.json')}
         loop={false}
         autoPlay={true}
-        style={{width: 90, height: 90, alignSelf: 'center'}}
-        // onAnimationFinish={() => {
-        //   alert("Animation Finished")
-        // }}
+        style={{width: 90, height: 90, alignSelf: 'center', justifyContent: 'center'}}
         
         />
 
-      {threads.map((thread) => (<Text key={thread.id}>{thread.author.name}</Text>))}
+      {threads.map((thread) => (
+      <ThreadsItem key={thread.id} {...thread} /> 
+      ))}
       </ScrollView>
     </SafeAreaView>
   );
